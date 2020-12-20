@@ -1,0 +1,735 @@
+create table project_user(
+userID int primary key,
+userName varchar(20) unique,
+upassword varchar(20) NOT NULL, 
+uemail varchar(30) NOT NULL,
+uName varchar(30) NOT NULL, 
+uLastName varchar(30) NOT NULL,
+relationshipID int,
+LanguageID int NOT NULL,
+EducationID int,
+WorkID int,
+uBio varchar(100),
+genderID int NOT NULL,
+ubirthDate date NOT NULL,
+religionID int,
+uProfilPic varchar(200),
+foreign key (genderID) references project_gender(genderID),
+foreign key (relationshipID) references relationship(relationshipID),
+foreign key (religionID) references religion (religionID),
+foreign key (languageID) references project_language(languageID));
+
+insert INTO project_user(userID, userName, upassword, uemail, uName, uLastName, relationshipID, LanguageID, EducationID, WorkID, uBio, genderID, ubirthDate, religionID, uprofilPic) 
+values
+ (100, 'albin01',	'bini123', 'albini.sh@live.com', 'Albin', 'Shala', 20001, 600,  803, 900, 'I love travelling!', 200, '2000-02-01', 500, 'img0.jpg'),
+ (101, 'altin00', 'tini001', 'tini.al@hotmail.com', 'Altin', 'Tafa', 20003, 607, 801,  908, 'Nurseto be!' ,200, '1999-11-03', 500, 'img1.jpg'),
+ (102, 'driton22', 'toni011', 'toni.ks@outlook.com',  'Driton', 'Krasniqi',  20005,  607,	809, 907, 'RMA fan', 200, '1999-12-12', 501, ' img2.jpg'),
+ (103,  'dardi99',  'Treniks',  'd.halili@gmail.com',  'Dardan',  'Halili' , 20001 , 607,  802, 904,  ':)',                200, ' 2000-08-06',503,' img3.jpg'),
+ (104,  'fjolla111', '123456',  'f.dema22@gmail.com', 'Fjolla',  'Dema',  20002,  600,806, 909,  '<3', 201, '1999-12-29 ', 503, 'img4.jpg'),
+(105 , 'dhurata99',  'hoti01',  'dhurata.hoti@gmail.com', 'Dhurata', 'Hoti', 20002,  600, 
+ 804,  905, '…', 201, ' 1998-01-15 ', 500, 'img5.jpg'),
+ (106 , 'jozi12', 'emri111', 'jozi.l@live.com', 'Jozefina', 'Luli', 20003,  600, 805,	 906,'Engineering :) ', 202,	'2001-07-04', 500, 'img6.jpg'),
+ (107, 'gonaaa', 'nikqi111',  'gona.n@hotmail.com', ' Marigona', 'Nikqi',  20004, 600,800, 902,  'Law student!',  201,  ' 2002-04-20 ', 504,	 'img7.jpg'),
+  (108, 'hana1010',  'hanadani', 'hana.dani@outlook.com',  'Hana', 'Dani', 20005, 607,807,903, 'Basketball fan',	 201, ' 1999-12-14 ‘ , 507, 'img8.jpg'),
+  (109, 'vlora98', 'vlora333', 'v.zema@live.com', 'Vlora', 'Zema', 20001,  600, 809, 901,
+  'Singer!',  201,	'1998-10-10 ',	506, 'img9.jpg');
+___________________________________________________________________________
+create table project_gender(
+genderID  int primary key,
+gender varchar(10) NOT NULL);
+
+insert INTO project_gender(genderID,gender) 
+values (200, 'male'),
+            (201, 'female'),
+             (202, 'other');
+________________________________________________________________________
+
+create table relationship(
+relationshipID int primary key,
+relationshipStatus varchar(20) NOT NULL);
+
+insert INTO relationship(relationshipID,relationshipStatus) 
+values
+          (20000, 'single');
+           (20001, 'single');
+           (20002, 'in a relationship'),
+           (20003, 'engaged'),
+            (20004, 'married'),
+            (20005, 'it is complicated'),
+            (20006,'divorced');                 
+________________________________________________________________________
+create table project_language(
+languageID int primary key,
+language_ varchar(20) NOT NULL);
+
+insert INTO project_language(languageID, language_) 
+values(600,'Anglisht'),
+             (601	,'Frengjisht'),
+               (602, 'Italisht'),
+               (603, 'Rusisht'),
+               (604, 'Turqisht'),
+                (605, 'Suedisht'),
+                (606,  'Arabisht'),
+                 (607,  'Shqip'),
+                 (608,  'Gjermanisht'),
+                 (609, 'Kroatisht');
+
+create table address (
+addressID int primary key,
+userID int,
+country varchar(30),
+zipCode int,
+city varchar (30),
+street varchar(50),
+foreign key(userID) references project_user(userID));
+
+insert INTO address(addressID, userID, country, city, zipCode, street)
+ values (300, 101, 'Kosove', 'Prishtine', 10000, 'Fan Noli'),
+              (301, 105,  'Shqiperi', 'Durres',  NULL, 'Skenderbeu'),
+              (302, 102,  'Kosove', 'Gjilan', NULL ,	'Hasan prishtina'),
+              (303, 109,  'Maqedoni',	 'Tetove', NULL, 'Nena Tereze'),
+              (304,  100, 'Shqiperi', 'Fier', NULL, 'Pandeli Sotiri'),
+              (305,  104,  'Kosove', 'Viti' ,30000 , 'Shaban Shala'),
+              (306, 108,  'Mali I Zi', 'Ulqin', NULL , 'Ismail Qemaili'),
+             (307,	107,  'Kosove',  'Prishtine', 10000, 'Shpetim Robaj'),
+             (308,	103,  'Shqiperi', 'Shkoder', NULL, 'Arsim Isufi'),
+             (309,	106, 'Kosove', 'Besiane', 70000, 'Naim Frasheri');
+__________________________________________________________________
+create table phone(
+phoneID int primary key,
+userID int,
+mobNumber int NOT NULL,
+fixNumber int);
+
+insert INTO phone(phoneID, userID, mobNumber, fixNumber)
+ values(400, 106, 383-44-340-443, 038-314-443),
+(401, 103, 355-37-330-489, NULL),	 
+(402, 100, 355-600-700,  NULL), 
+(403, 102, 383-44339-220, 038-560-650),
+(404, 109 ,389-47-333-576, NULL),
+(405, 108 ,045-100-200, NULL),
+(406, 101 ,383-45-110-450, 038-229-440),
+(407, 104 ,383-44-120-002, 038-550-650),
+(408, 107, 383-49-100-200, 038-440-121),
+(409, 105, 355-49-500-300, NULL);
+
+________________________________________________________________________	
+create table Albumi(
+albumID int primary key,
+userID int,
+albumName varchar(30),
+albumPostedDate date NOT NULL,
+albumPostedTime time NOT NULL,
+albumContentID int,
+albumLike int NOT NULL,
+foreign key(userID) references project_user(userID),
+foreign key(albumContentID) references albumContent(albumContentID));
+
+INSERT INTO Albumi(albumID,userID,albumName,albumPostedDate,albumPostedTime,albumContentID,albumLike) 
+VALUES (700, 101, 'Ulqin2018', '2018-07-02', '13:07:04', 90, 20),
+               (701, 105, 'Prom Night', '2017-05-05', '11:00:06', 90, 35),
+               (702, 104, 'Une', '2014-05-03', '23:05:20', 92, 45),
+               (703, 103, 'Vera2016', '2017-02-04', '15:15:04', 91, 78),
+               (704, 108, 'Brezovica Trip', '2015-01-07', '05:12:00', 90, 12),
+               (705, 100, 'Familja', '2008-04-06', '07:30:45', 91, 45),
+               (706, 102, 'Viti I Ri', '2019-01-01', '16:00:04', 91, 66),
+               (707, 109, 'Bajrami2019', '2019-06-06','18:15:04', 92, 53),
+               (708, 107, 'Shoqnia', '2013-03-01', '01:12:35', 91, 23),
+                (709, 106, 'Afati I Prillit', '2019-04-04', '16:03:24', 90, 17);
+________________________________________________________________________
+create table albumContent(
+albumContentID int primary key,
+content varchar(30)  NOT NULL);
+
+INSERT INTO albumContent(albumContentID,content)
+VALUES (90, 'image');
+                ( 91, 'video');
+                (92, 'video+foto');
+________________________________________________________________________
+create table Education(
+educationID int primary key,
+userID int, 
+elementarySchool varchar(50),
+highSchool varchar(50),
+university varchar(50),
+other varchar(50),
+foreign key(userID) references project_user(userID) );
+
+INSERT INTO Education(educationID, userID, elementarySchool, highSchool,university,other)
+VALUES (800, 103, 'Gjergj Fishta','Sami Frasheri', 'UP', 'Master'),
+               (801, 101, 'Shaban Shala', 'Ali Sokol', 'UBT', 'PHD'),
+               (802, 109, 'Elena Gjika', 'Xhevdet Doda', 'UT', NULL),	 
+               (803, 102, 'Pjeter Bogdani', 'Sami Frasheri', 'USHT', NULL),	 
+              (804, 106, 'Naim Frasheri', 'Ali Sokol', 'Heimerer', NULL),	 
+              (805, 104, 'Gjergj Fishta', 'Sami Frasheri', 'UP', 'Master'),
+             (806,105, 'Gjergj Fishta', 'Ali Sokol', 'AAB', NULL),	 
+             (807, 100, 'Elena Gjika', NULL, NULL, NULL ),	 	 	 
+             (808, 107, 'Shaban Shala', 'Sami Frasheri', 'Dardania', NULL),	 
+             (809, 109, 'Ismail Qemali', 'Bedri Pejani', NULL, NULL);
+
+
+
+
+________________________________________________________________________
+create table Work_table(
+workID INT primary key,
+userID int, 
+previousWork varchar(30),
+currentWork varchar(30),
+foreign key(userID) references project_user(userID));
+
+INSERT INTO Work_table(workID,userID,previousWork,currentWork)
+VALUES (900,100,'cook','cookingchief'),
+               (901, 109, 'student', 'IT'),
+               (902, 107, NULL, 'waiter'),
+               (903, 108, 'nailartist', 'nurse'),
+               (904, 103, 'sailesman', 'unemployed'),
+               (905, 105, 'waiter', 'student'),
+               (906, 106, 'bartender', 'club manager'),
+                (907, 102, 'assistant', 'proffessor'),
+                (908, 101, 'lawyer', 'judge'),
+               (909, 104, 'babysitter', 'teacher');
+________________________________________________________________________
+create table Abilities(
+abilitiesID int primary key,
+userID int, 
+abilities varchar(30), 
+foreign key(userID) references project_user(userID) );
+
+INSERT INTO Abilities(abilitiesID,userID,abilities)
+VALUES ( 1100, 100, NULL), 
+                       ( 1101, 104, 'communication skills'),
+                        (1102, 105 ,'memory skills'),
+                          (1103 ,100, 'good with math'),
+                          (1104, 102, 'empathy'),
+                          (1105, 103, 'communication skills'),
+                          (1106, 109, 'critical-reasoning'),
+                          (1107, 108, 'communication skills'),
+                          (1108, 107, 'speak clearly'),
+                          (1109, 102, 'teamwork');
+________________________________________________________________________
+create table Hobbies(
+hobbiesID int primary key,
+userID int, 
+hobbies varchar(30),
+foreign key(userID) references project_user(userID) );
+
+INSERT INTO Hobbies(hobbiesID,userID,hobbies)
+VALUES
+(1200, 104, 'basketball'),
+(1202, 100, 'movie freak'),
+(1203, 103, 'hiking'),
+(1204, 107, 'collecting'),
+(1205, 109, 'reading'),
+(1206, 102, 'cooking'),
+(120, 106, 'fashion'),
+(1208, 101, 'gaming'),
+(1209, 109, 'painting');
+________________________________________________________________________
+create table Likes(
+likesID int primary key,
+books varchar(40),
+movies varchar (40),
+music varchar(30) );
+
+INSERT INTO LIKES(likesID,books,movies,music)
+VALUES
+(1000, 'Milk And Honey', 'Joker', 'rock'),
+(1001, 'The Sun', 'Interstellar', 'pop'),
+(1002, 'Alkimisti', 'Pulp Fiction', 'jazz'),
+(1003, 'Harry Poter', 'Harry Poter', 'electronic'),
+(1004, 'PaperTown', 'Serendipity', 'house'),
+(1005, 'Lord Of The Rings', 'Lord Of the Rings', 'hip-hop'),
+(1006, 'Mockingbird', 'The Notebook', 'rap'),
+(1007, 'The Hobbit', 'Lord Of the Rings', 'classic'),
+(1008, 'Druri norvegjez', 'Everything', 'hip-hop'),
+(1009, 'Gjuetari I Balonave', 'Zana', 'indie');
+________________________________________________________________________
+create table Posts (
+postID int primary key,
+userID int,
+postedDate date NOT NULL,
+postedTime time NOT NULL,
+postContentID int,
+postLocation varchar(20),
+whoCanSeePostID int,
+albumID int,
+nrLikes int NOT NULL,
+foreign key(userID) references project_user(userID),
+foreign key(postContentID) references postContent(postContentID),
+foreign key(whoCanSeePostID) references whoCanSeePost(whoCanSeePostID),
+foreign key(albumID) references albumi(albumID)
+);
+
+INSERT INTO Posts
+(postID,userID,postedDate,postedTime,postContentID,postLocation,whoCanSeePostID,albumID,NrLikes)
+VALUES
+(1313, 106, '2019-11-25', '12:12',3000, 'Prizren', 4002, NULL, 20),
+(1314, 106, '2019-11-25', '13:30', 3001, 'Peje', 4001, NULL, 21),
+(1300, 102, '2019-11-26', '11:11', 3000, 'Prishtine', 4000, NULL, 15),
+(1301, 105, '2019-11-25', '21:00', 3001, 'Prishtine', 4000, NULL, 16),
+(1302, 108, '2018-01-17', '18:30', 3003, 'Prizren', 4001, 700, 85),
+(1303, 104, '2019-11-25', '5:01', 3002, 'Tirane', 4002, NULL, 96),
+(1304, 100, '2019-11-25', '12:02',3003, 'Peje', 4000, 705, 12),
+(1305, 106, '2016-03-10', '11:05', 3001, 'New York', 4003, NULL, 35),
+(1306, 103, '2019-11-23', '0:01', 3003, 'Ulqin', 4004, 703, 123),
+(1307, 107,  '2019-11-24', '13:35', 3000, 'Bredhove', 4004, NULL, 25),
+(1308, 109, '2019-01-11', '14:53', 3003, 'Prishtine', 4004, 707, 32),
+(1309, 101, '2019-11-24', '23:09', 3000, 'Prishtine', 4001, NULL, 45),
+(1310, 101, '2019-11-23', '11:00', 3000, 'Prishtine', 4004, NULL, 12),
+(1311, 104, '2019-11-23', '14:03', 3002, 'Tirane', 4002, NULL, 13),
+(1312, 104, '2019-11-24', '12:12', 3001, 'Prishtine', 4000, NULL, 12);
+_______________________________________________________________________
+create table postContent(
+postContentID int primary key,
+postContent varchar(30) NOT NULL
+);
+
+INSERT INTO postContent
+(postContentID,postContent)
+VALUES
+(3000, 'image'),
+(3001, 'video'),
+(3002, 'status'),
+(3003, 'album');
+
+___________________________________________________________________
+create table whoCanSeePost(
+whoCanSeePostID int primary key,
+canBeSeenFrom varchar(20) NOT NULL
+);
+
+ INSERT INTO whoCanSeePost
+(whoCanSeePostID,canBeSeenFrom)
+VALUES
+(4000, 'Public'),
+(4001,' friends only'),
+(4002, 'friends of friends'),
+(4003, 'only me'),
+(4004, 'close friends');
+_______________________________________________________________________
+create table albumsContent(
+contentID int primary key ,
+postContentID int,
+postlike int,
+foreign key(postContentID) references postContent(postContentID)
+);
+
+INSERT INTO albumsContent
+(ContentID,postContentID,postLike)
+VALUES
+(15000, 3000, 20),
+(15001, 3001, 35),
+(15002, 3001, 19),
+(15003, 3000, 110);
+________________________________________________________________________
+create table postLikes (
+postID int primary key, 
+userID int ,
+likedDate date NOT NULL, 
+likedTime time NOT NULL,
+foreign key (postID) references Posts(postID),
+foreign key(userID)references project_user(userID)
+);
+
+INSERT INTO postLikes
+(postID,userID,likedTime,likedDate)
+VALUES
+(1300, 102, '14:53', '2019-11-26'),
+(1304, 100,'13:35', '2019-11-25'),
+(1305, 106, '11:02', '2016-03-10'),
+(1302, 108, '18:01', '2018-01-18'),
+(1309, 101, '0:23', '2019-11-24'),
+(1308, 109, '12:00', '2019-01-11'),
+(1300, 102, '11:52', '2019-11-27'),
+(1306, 103, '15:49', '2019-11-25'),
+(1301, 105, '11:18', '2019-11-25'),
+(1303,104,'19:21','2019-11-26');
+________________________________________________________________________
+create table likedContent(
+likedContentID int primary key,
+content varchar(20) NOT NULL
+);
+INSERT INTO likedContent
+(likedContentID,content)
+VALUES
+(5000, 'photo'),
+(5001, 'video'),
+(5002, 'status');
+________________________________________________________________________
+create table postComments(
+commentID int primary key,
+postID int ,
+foreign key(commentID) references Comments(commentID),
+foreign key(postID) references Posts(postID)
+);
+INSERT INTO postComments
+(commentID,PostID)
+VALUES
+(6000, 1309),
+(6001, 1309),
+(6002, 1300),
+(6003, 1302),
+(6004, 1303),
+(6005, 1305),
+(6006, 1307),
+(6007, 1305),
+(6008, 1307);
+________________________________________________________________________
+create table Comments(
+commentID INTEGER,
+userID INTEGER,
+coment VARCHAR(150) NOT NULL,
+commentDate DATE NOT NULL,
+commentTime TIME NOT NULL,
+PRIMARY KEY (commentID),
+FOREIGN KEY(userID) references project_user(userID)
+);
+
+INSERT INTO comments(commentID, userID, coment, commentDate, commentTime)
+VALUES 
+(6000,  104,  'bukuroshe',  '2019/11/24', ‘11:23'),
+(6001, 102, 'oj zemer',  '2018/01/10', '12:03'),
+(6002, 104,  'ke shkelqyer', '2019/11/23', '13:05'),
+(6003, 106,  'me I bukuri I tetes', '2017/01/12', '16:05'),
+(6004, 107,  '<3<3', '2019/11/23', '19:30'),
+(6005, 109,  'Te kam yll',  '2019/11/25', '20:02'),
+(6006, 101,  'Wow',  '2019/11/23', '16:38'),
+(6007, 102,  'Shume mire',  '2018/03/12', '21:00'),
+(6008, 101,  'Te fala ne shtepi',  '2019/11/24', '06:45');
+________________________________________________________________________
+create table CommentLikes (
+commentID INTEGER,
+userID INTEGER,
+clikedDate DATE NOT NULL,
+clikedTime TIME NOT NULL,
+PRIMARY KEY (commentID,userID),
+FOREIGN KEY (commentID) references Comments(CommentID),
+FOREIGN KEY (userID) references project_user(userID)
+);
+
+INSERT INTO commentLikes(userID, commentID ,clikedDate, clikedTime)
+VALUES
+(100, 6000, '2019/11/11', '11:01'),
+(101, 6002, '2014/11/04', '13:10'),
+(109, 6005, '2019/11/02', '20:04'),
+(102, 6008, '2019/10/22', '06:45'),
+(109, 6008, '2019/10/22', '08:02'),
+(108, 6006, '2019/01/13', '16:44'),
+(104, 6000, '2019/11/12', '11:50'),
+(105, 6004, '2019/04/13', '20:00'),
+(103, 6003, '2017/01/12', '16:45');
+________________________________________________________________________
+create table project_share (
+shareID INTEGER,
+userID INTEGER,
+postID INTEGER,
+sharedDate DATE NOT NULL,
+sharedTime TIME NOT NULL,
+coment VARCHAR(150),
+PRIMARY KEY (shareID),
+FOREIGN KEY (userID) references project_user(userID),
+FOREIGN KEY (postID) references posts(postID)
+);
+INSERT INTO project_share (shareID, postID, userID ,sharedDate, sharedTime, coment)
+VALUES
+(7000, 1300, 100, '2019/11/26', '12:08', 'Dikur..'),
+(7001, 1303, 105, '2019/11/24', '11:00', 'Wow'),
+(7002, 1306, 104, '2019/11/23', '01:03', NULL),	 
+(7003, 1304, 104, '2018/01/08', '20:02', NULL),	 
+(7004, 1303, 103, '2019/01/11', '03:00', 'Mood'),
+(7005, 1300, 102, '2018/11/02', '23:59', 'Ia vlen mu pa'),
+(7006, 1302, 107, '2019/11/25', '14:06', 'Urime'),
+(7007, 1307, 105, '2019/11/23', '19:06', 'Prom Queen'),
+(7008, 1305, 101, '2019/11/24', '22:22', NULL);
+ (7009, 1302, 101, '2019-11-23', '11:01', NULL),
+(7010, 1301, 104, '2019-11-24', '12:57', NULL);
+________________________________________________________________________
+create table requestStatus(
+requestStatusID INTEGER,
+status varchar(30) NOT NULL,
+PRIMARY KEY (requestStatusID)
+);
+
+INSERT INTO requestStatus(requestStatusID, status)
+VALUES
+(8000, 'Accept'),
+(8001, 'Delete'),
+(8002, 'Pending');
+________________________________________________________________________
+create table friendRequest
+
+(
+friendRequestID INTEGER,         
+fromUserID INTEGER,
+toUserID INTEGER,
+requestStatusID INTEGER,
+requestDate DATE NOT NULL,
+requestTime TIME NOT NULL,
+PRIMARY KEY (friendRequestID),
+FOREIGN KEY (requestStatusID) references requestStatus(requestStatusID),
+FOREIGN KEY (fromUserID) references project_user(userID),
+FOREIGN KEY (toUserID) references project_user(userID),       
+CONSTRAINT differentUsers CHECK (fromUserID <> toUserID)
+);
+
+INSERT INTO friendRequest(friendRequestID,fromUserID, toUserID, requestStatusID, requestDate, requestTime)
+VALUES
+(80, 100, 101, 8000, '2018/01/11', '03:04'),
+(81, 107, 103, 8001, '2010/08/07', '13:09'),
+(82, 102, 103, 8002, '2014/05/12', '03:54'),
+(83, 105, 104, 8000, '2019/04/13', '12:54'),
+(84, 104, 109, 8002, '2017/11/01', '03:24'),
+(85, 109, 100, 8001, '2018/12/20', '02:00'),
+(86, 100, 104, 8000, '2016/02/17', '15:07'),
+(87, 103, 100, 8001, '2009/01/22', '22:09'),
+(88, 102, 101, 8002, '2019/04/11', '14:14');
+________________________________________________________________________
+create table friends (
+friendsID int,
+firstUserID INTEGER,
+secondUserID INTEGER,
+friendsDate DATE NOT NULL,
+friendsTime TIME NOT NULL,
+PRIMARY KEY (friendsID),
+FOREIGN KEY(firstUserID) references project_user(userID),
+FOREIGN KEY(secondUserID) references project_user(userID)  ,              
+CONSTRAINT differentUser CHECK (firstUserID <> secondUserID)
+);
+
+INSERT INTO friends (friendsID,firstUserID, secondUserID, friendsDate, friendsTime)
+VALUES
+(70, 100, 101, '2018/01/11', '11:01'),
+(71, 107, 103, '2010/08/08', '12:12'), 
+(72, 102, 103, '2014/05/15', '22:48'),
+(73, 105, 104, '2019/04/13', '20:12'),
+(74, 104, 109, '2019/11/02', '14:11'),
+(75, 109, 100, '2018/12/20', '08:32'),
+(76, 100, 104, '2016/02/17', '16:12'),
+(77, 103, 100, '2009/01/22', '22:15'), 
+(78, 102, 101, '2019/04/20', '19:06');
+________________________________________________________________________
+create table social_groups(
+groupID int  primary key,
+groupName varchar(30) not null,
+groupDate datetime,
+whoCanSeeGroup int not null
+);
+
+insert INTO social_groups(groupID, groupName, groupDate,whocanseegroup) 
+Value 
+(9000, 'Sinjale G1', '2019-09-05 11:10:00', 19001),
+ (9001, 'Project', '2017-04-20 00:02:00', 19002),    
+ (9002, 'Maniak te kerreve', '2016-06-25 12:03:00', 19000),
+ (9003, 'viti2', '2018-01-17  11:06:00', 19000),
+ (9004, 'Common aim', '2017-10-02 22:32', 19001),
+ (9005, 'FIEK students', '2009-10-07 07:00:00', 19000);
+________________________________________________________________________
+create table members(
+        groupID int,
+        userID int,
+        primary key (groupID,userID),
+        foreign key(groupID) references social_groups(groupID),
+        foreign key(userID) references project_user(userID)
+        );
+
+ insert INTO members(groupID, userID)
+ values
+  (9002,100),
+  (9003,101),
+  (9001,101),
+  (9001,102),
+  (9000,107),
+  (9001,105),
+  (9004,105),
+  (9002,106),
+  (9001,104),
+  (9000,102);      
+________________________________________________________________________
+create table whoCanSeeGroup(
+whoCanSeeGroupID int primary key,
+whoCanSeeGroup varchar(30) not null
+);
+
+insert INTO whoCanSeeGroup(whocanseegroupID,whocanseegroup) 
+Value
+(19000,'Public Group'),
+ (19001,'Private Group'),
+ (19002,'Close Gruop'),
+ (19003,'Secret Group');
+________________________________________________________________________
+create table groupAdmin(
+groupAdminID int ,
+groupID int NOT NULL,
+primary key(groupAdminID,  groupID),
+foreign  key(groupAdminID)  references Project_user(userID),
+foreign key(groupID) references social_groups(groupID)
+);	
+
+insert INTO groupadmin(groupAdminID, groupID) 
+values
+(100, 9000),
+ (102, 9003),
+ (103, 9001),
+ (104, 9005),
+ (105, 9002),
+ (106, 9003),
+(107, 9000);
+________________________________________________________________________
+create table social_events(
+eventID int primary key,
+eventName varchar(20) not null,
+eventLocation varchar(20) not null,
+eventDescription varchar(250) ,
+eventBeginDateTime datetime not null,
+eventEndDateTime datetime );
+
+insert INTO social_events(eventID, eventName, eventLocation, eventDescription, eventBeginDateTime, eventEndDateTime) 
+values
+ (11000,'Brezovica 2018', 'Bredhove', 'Nisja behet ne oren 06:00 te Hotel Grand', '2019-12-22      06:00:00', null),
+ (11001, 'Prom Night', 'Prishtine', 'Sami Frasheri Prom Night', '2018-05-13 20:00:00', '2018-05-16  02:00:00'),
+ (11002, 'Zanzi', 'Prishtine', 'Performon Shpat Deda', '2019-11-26 23:00:00', null),	
+ ( 11003, 'Dit e Nat', 'Prishtine', 'Merrne shoqnin', '2019-11-26 23:00:00', null),
+ (11004, 'Dukagjini', 'Prishtine', 'Libri shoku me I mire I njeriut.', '2020-04-04 12:00:00', '2020-    04-04 22:00:00'),
+ (11005, 'Zone Club', 'Prishtine', 'Neja o knej!', '2019-12-31 22:00:00', null),
+ (11006, 'HikingNjeri',	'Rugove', 'Per rezervime kontaktoni ne nr:049321453', '2019-11-26 05:00:00', '2019-11-26 18:00:00');
+________________________________________________________________________
+create table participation(
+eventID int,
+userID int,
+confirmation varchar(20),
+primary key(eventID, userID),
+foreign key(eventID) references social_events(eventID),
+foreign key (userID) references project_user(userID)
+);
+
+insert INTO participation(eventID, userID, confirmation) 
+values
+(11000 ,107, 'Going'),
+(11001, 101, 'Interested'),
+(11002, 103, 'Not Going'),
+(11003, 106, 'Going'),
+(11004, 108, 'Interested'),
+(11005, 100, 'Not Going'),
+(11006, 105, 'Going'),
+(11006, 102, 'Going'),
+(11006, 109, 'Interested'),
+(11006, 104, 'Not Going');
+
+create table Project_Block
+(
+blockID int, 
+userID int,
+touserID int, 
+blockedDate date NOT NULL,
+blockedTime time NOT NULL,
+primary key (blockID),
+foreign key(userID) references Project_User(userID),
+foreign key(touserID) references Project_User(userID),
+constraint differentUserID CHECK(userID <> toUserID)
+ );
+
+insert INTO Project_Block( blockID, userID, touserID, blockedDate, blockedTime) 
+VALUE 
+(12000, 101, 109, '2019/06/12', '11:52'),
+(12001, 102, 104, '2017/04/01' , '12:14'),
+(12002, 103, 107, '2019/12/22', '00:06');
+
+create table postTag
+( 
+tagID int,
+userID int,
+toUserID int,
+postID int,
+primary key(tagID),
+foreign key(userID) references Project_User(userID),
+foreign  key(toUserID) references Project_User(userID),
+foreign key(postID) references Project_User(userID),
+constraint diffUser CHECK (userID<>toUserID)
+);
+
+
+insert INTO postTag( tagID, userID, touserID, postID) 
+VALUE 
+(13000, 100, 105, 1305),
+(13001, 101, 102, 1302),
+(13002,  108, 104, 1300),
+(13003,  106, 102, 1306),
+(13004,  107, 109, 1309),
+(13005,  104, 101, 1301);
+
+create table commentTags
+(
+ ctagID int,
+ userID int ,
+ toUserID int,
+ commentID int,
+ primary key(ctagID),
+ foreign key(userID) references Project_User(userID),
+ foreign key(toUserID) references Project_User(userID),
+ foreign key(commentID) references comments(commentID),
+ constraint diffUsers CHECK (userID<>toUserID)
+);
+insert INTO commentTags( ctagID, userID, toUserID, commentID) 
+Value
+(14000, 100, 104, 6000),
+(14001, 109, 102, 6002),
+(14002, 102, 109, 6003),
+(14003, 104, 101, 6005),
+(14004, 106, 105, 6006),
+(14005, 104, 107, 6001);
+
+create table lastActive
+(
+ userID int,
+ activeStatusID boolean,
+ activeDate DATE,
+ activeTime TIME, 
+ primary key(userID,activeStatusID),
+ foreign key(userID) references Project_User(userID),
+ foreign key(activeStatusID) references ActiveStatus(activeStatusID)
+ );
+ insert INTO lastActive(userID, activeStatusID, activeDate, activeTime) 
+ Value
+ (100, 0, '2019/01/11', '11:03'),
+ (101, 0, '2019/02/02', '12:15'),
+ (102, 1, '2019/01/13', '19:14'),
+ (103, 1, '2019/11/23', '21:19'),
+ (104, 0, '2019/08/04', '12:03'),
+ (105, 1, '2019/11/01', '14:00'),
+ (106, 0, '2019/01/18', '11:08'),
+ (107, 0, '2019/11/23', '19:11'),
+ (108, 1, '2019/10/20', '00:11'),
+ (109, 1, '2019/10/12', '13:02');
+
+create table ActiveStatus
+(
+activeStatusID boolean,
+ activeStatus varchar(10),
+ primary key (activeStatusID)
+ );
+ insert INTO ActiveStatus(activeStatusID, activeStatus) 
+ Value
+ (0, 'offline'),
+ (1, 'online');
+________________________________________________________________________
+create table SecurityLogins
+(
+securityLoginsID int primary key, 
+userID int, 
+device varchar(20) NOT NULL,
+loginLocation varchar(20) NOT NULL, 
+loginDate date NOT NULL,
+loginTime time NOT NULL,
+foreign key(userID) references Project_User(userID)
+);
+insert INTO SecurityLogins(securityLoginsID, userID, device, loginLocation, loginDate, loginTime) 
+Value
+(17000, 100, 'Iphone 7', 'Prishtine', '2019/12/11', '00:32'),
+(17001, 101,'Samsung J7', 'Prishtine','2018/01/12','14:58'),
+(17002, 103, 'Windows XP',' Prishtine', '2018/05/03','17:52'),
+(17003, 104, 'Iphone X', 'Prizren','2017/04/23', '13:01'),
+(17004, 105, 'Samsung S8','Peje', '2019/10/31', '18:00'),
+(17005, 106, 'Samsung A5', 'Gjakove', '2017/04/12', '19:03'),
+(17006, 107, 'Iphone 6+', 'Peje', '2016/05/15', '09:02'),
+(17007, 108, 'Iphone 7', 'Tirane', '2018/09/14', '12:12')
